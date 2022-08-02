@@ -1,13 +1,12 @@
 #!/bin/bash
 
 # A shell script because I am too lazy to type a couple of extra lines every single time I want to create a new Django project
-# Obviously, without being said, it's a requirement for the script to have virtualenv installed.... and Python....
-# Do what you want with the script, I won't lose any sleep over it. 
+# A couple requirements are virtual environment, python, and git
 
 command=$1
 
 create_venv() {
-    echo "Creating virtual environment..."
+    echo "\nCreating virtual environment..."
     python3 -m venv venv
     echo "Done!"
 }
@@ -30,7 +29,19 @@ migrate() {
     python manage.py migrate
 }
 skeleton() {
-    # Will git clone a basic skeleton for a django app
+    echo '\nWhich type of project?\n1) Regular Django Project\n2) Django API'
+    read project_type
+
+    if [[ $project_type == '1' ]]
+        then
+            echo "\nCloning Django project..."
+            git clone git@github.com:EclecticOwl/django-skeleton.git
+            cd django-skeleton
+            create_venv
+            source_venv
+            echo '\nInstalling dependencies'
+            pip install -r requirements.txt
+    fi
 }
 
 if [[ -z $command ]]
@@ -39,8 +50,11 @@ if [[ -z $command ]]
 elif [[ $command == 'help' ]]
     then
         echo '\nThe following is a list of arguments for this script:'
-        echo '\ncreate\n\nThis starts a new Django project within a virtual environment and starts the core project\n'
-        echo 'migrate\n\nThis calls Djangos built-in makemigrations and migrate sub-commands\n'
+        echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+        echo '\ncreate: This starts a new Django project within a virtual environment and starts the core project\n'
+        echo "migrate: This calls Django\'s built-in makemigrations and migrate sub-commands\n"
+        echo 'skeleton: This gives an option of git clone for a regular django project or the api version using django-rest-framework'
+        echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 elif [[ $command == 'create' ]]
     then
         create_venv
@@ -49,4 +63,9 @@ elif [[ $command == 'create' ]]
 elif [[ $command == 'migrate' ]]
     then
         migrate
+elif [[ $command == 'skeleton' ]]
+    then
+        skeleton
 fi
+
+
