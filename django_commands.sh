@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # A shell script because I am too lazy to type a couple of extra lines every single time I want to create a new Django project
-# Obviously, without being said, it's a requirement for the script to have virtualenv installed
+# Obviously, without being said, it's a requirement for the script to have virtualenv installed.... and Python....
 # Do what you want with the script, I won't lose any sleep over it. 
 
 command=$1
