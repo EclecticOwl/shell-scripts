@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # A shell script because I am too lazy to type a couple of extra lines every single time I want to create a new Django project
 # A couple requirements are virtual environment, python, and git
 
@@ -41,7 +40,16 @@ skeleton() {
             source_venv
             echo '\nInstalling dependencies'
             pip install -r requirements.txt
+    else
+            echo "\nCloning Django project..."
+            git clone git@github.com:EclecticOwl/django-skeleton-api.git
+            cd django-skeleton-api
+            create_venv
+            source_venv
+            echo '\nInstalling dependencies'
+            pip install -r requirements.txt
     fi
+    gi python
 }
 
 if [[ -z $command ]]
@@ -54,7 +62,7 @@ elif [[ $command == 'help' ]]
         echo '\ncreate: This starts a new Django project within a virtual environment and starts the core project\n'
         echo "migrate: This calls Django\'s built-in makemigrations and migrate sub-commands\n"
         echo 'skeleton: This gives an option of git clone for a regular django project or the api version using django-rest-framework'
-        echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+        echo '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 elif [[ $command == 'create' ]]
     then
         create_venv
