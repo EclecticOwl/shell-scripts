@@ -1,6 +1,6 @@
 #!/bin/bash
 # A shell script because I am too lazy to type a couple of extra lines every single time I want to create a new Django project
-# A couple requirements are virtual environment, python, and git
+# This script needs a few requirements: Python, Virtual Environment, and Git for the Skeleton project
 
 command=$1
 
